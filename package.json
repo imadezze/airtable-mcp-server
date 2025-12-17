@@ -17,8 +17,8 @@
   "bin": "dist/main.js",
   "mcpName": "io.github.domdomegg/airtable-mcp-server",
   "scripts": {
-    "start": "npm run build && node ./dist/main.js",
-    "start:http": "npm run build && MCP_TRANSPORT=http node ./dist/main.js",
+    "start": "node dist/main.js",
+    "start:http": "MCP_TRANSPORT=http node dist/main.js",
     "test": "vitest run",
     "test:watch": "vitest --watch",
     "lint": "eslint",
