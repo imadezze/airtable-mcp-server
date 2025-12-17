@@ -32,10 +32,6 @@ export class AirtableService implements IAirtableService {
 		fetchFn: typeof fetch = fetch,
 	) {
 		this.apiKey = apiKey.trim();
-		if (!this.apiKey) {
-			throw new Error('airtable-mcp-server: No API key provided. Set it in the `AIRTABLE_API_KEY` environment variable');
-		}
-
 		this.baseUrl = baseUrl;
 		this.fetch = fetchFn;
 	}
@@ -306,6 +302,10 @@ export class AirtableService implements IAirtableService {
 	}
 
 	private async fetchFromAPI<T>(endpoint: string, schema: z.ZodType<T>, options: RequestInit = {}): Promise<T> {
+		if (!this.apiKey) {
+			throw new Error('airtable-mcp-server: No API key provided. Set it in the `AIRTABLE_API_KEY` environment variable');
+		}
+
 		const response = await this.fetch(`${this.baseUrl}${endpoint}`, {
 			...options,
 			headers: {
